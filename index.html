@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adventure Sports Marketplace</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Adventure Sports Marketplace</h1>
+    <nav>
+      <ul>
+        <li><a href="#" data-target="home">Home</a></li>
+        <li><a href="#" data-target="listings">Listings</a></li>
+        <li><a href="#" data-target="about">About</a></li>
+        <li><a href="#" data-target="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="page active">
+      <h2>Welcome</h2>
+      <p>Discover thrilling adventure sports experiences near you!</p>
+    </section>
+    <!-- Listings Section -->
+    <section id="listings" class="page">
+      <h2>Adventure Listings</h2>
+      <div class="listing" data-id="1">
+        <h3>Mountain Biking</h3>
+        <p>Experience the thrill of mountain biking with certified guides.</p>
+        <button onclick="openBookingModal('Mountain Biking')">Book Now</button>
+      </div>
+      <div class="listing" data-id="2">
+        <h3>Rock Climbing</h3>
+        <p>Climb to new heights with expert instructors.</p>
+        <button onclick="openBookingModal('Rock Climbing')">Book Now</button>
+      </div>
+      <div class="listing" data-id="3">
+        <h3>White-Water Rafting</h3>
+        <p>Feel the rush of white-water rafting adventures.</p>
+        <button onclick="openBookingModal('White-Water Rafting')">Book Now</button>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="page">
+      <h2>About Us</h2>
+      <p>
+        Our platform connects adventure seekers with certified trainers and gear rentals. We are dedicated to providing safe and exciting experiences for everyone.
+      </p>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="page">
+      <h2>Contact Us</h2>
+      <form id="contactForm" onsubmit="submitContactForm(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+        <label for="message">Message:</label>
+        <textarea id="message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="contactMessage"></div>
+    </section>
+  </main>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeBookingModal()">&times;</span>
+      <h2>Book Adventure: <span id="modalAdventureName"></span></h2>
+      <form id="bookingForm" onsubmit="submitBooking(event)">
+        <label for="bookingName">Your Name:</label>
+        <input type="text" id="bookingName" required />
+        <label for="bookingEmail">Your Email:</label>
+        <input type="email" id="bookingEmail" required />
+        <button type="submit">Confirm Booking</button>
+      </form>
+      <div id="bookingMessage"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
