@@ -3,82 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adventure Sports Marketplace</title>
+  <title>Adventure India | Professional Adventure Sports Booking</title>
+  <meta name="description" content="Discover and book curated adventure sports experiences happening across India with live weather and destination insights." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Adventure Sports Marketplace</h1>
-    <nav>
-      <ul>
-        <li><a href="#" data-target="home">Home</a></li>
-        <li><a href="#" data-target="listings">Listings</a></li>
-        <li><a href="#" data-target="about">About</a></li>
-        <li><a href="#" data-target="contact">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#home" class="logo">Adventure<span>India</span></a>
+      <nav>
+        <ul>
+          <li><a href="#home" data-target="home" class="active-link">Home</a></li>
+          <li><a href="#experiences" data-target="experiences">Experiences</a></li>
+          <li><a href="#bookings" data-target="bookings">Bookings</a></li>
+          <li><a href="#contact" data-target="contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
+
   <main>
-    <!-- Home Section -->
-    <section id="home" class="page active">
-      <h2>Welcome</h2>
-      <p>Discover thrilling adventure sports experiences near you!</p>
-    </section>
-    <!-- Listings Section -->
-    <section id="listings" class="page">
-      <h2>Adventure Listings</h2>
-      <div class="listing" data-id="1">
-        <h3>Mountain Biking</h3>
-        <p>Experience the thrill of mountain biking with certified guides.</p>
-        <button onclick="openBookingModal('Mountain Biking')">Book Now</button>
-      </div>
-      <div class="listing" data-id="2">
-        <h3>Rock Climbing</h3>
-        <p>Climb to new heights with expert instructors.</p>
-        <button onclick="openBookingModal('Rock Climbing')">Book Now</button>
-      </div>
-      <div class="listing" data-id="3">
-        <h3>White-Water Rafting</h3>
-        <p>Feel the rush of white-water rafting adventures.</p>
-        <button onclick="openBookingModal('White-Water Rafting')">Book Now</button>
+    <section id="home" class="page active hero">
+      <div class="container hero-content">
+        <p class="pill">Trusted Adventure Marketplace</p>
+        <h1>Book Professional Adventure Sports Across India</h1>
+        <p>
+          We combine destination intelligence from <strong>Wikipedia REST API</strong> and
+          <strong>Open-Meteo Forecast API</strong> to help you discover adventure experiences
+          happening in India and book securely in minutes.
+        </p>
+        <div class="hero-actions">
+          <button type="button" id="exploreBtn">Explore Experiences</button>
+          <a class="secondary-link" href="#contact" data-target="contact">Talk to an Advisor</a>
+        </div>
       </div>
     </section>
-    <!-- About Section -->
-    <section id="about" class="page">
-      <h2>About Us</h2>
-      <p>
-        Our platform connects adventure seekers with certified trainers and gear rentals. We are dedicated to providing safe and exciting experiences for everyone.
-      </p>
+
+    <section id="experiences" class="page">
+      <div class="container">
+        <div class="section-head">
+          <h2>Adventure Experiences in India</h2>
+          <p>Live listings with weather snapshots and destination highlights.</p>
+        </div>
+        <div id="experienceStatus" class="status">Loading curated adventures…</div>
+        <div id="experienceGrid" class="experience-grid" aria-live="polite"></div>
+      </div>
     </section>
-    <!-- Contact Section -->
+
+    <section id="bookings" class="page">
+      <div class="container">
+        <div class="section-head">
+          <h2>My Ticket Requests</h2>
+          <p>Your recent bookings are stored locally on this device.</p>
+        </div>
+        <div id="bookingList" class="booking-list"></div>
+      </div>
+    </section>
+
     <section id="contact" class="page">
-      <h2>Contact Us</h2>
-      <form id="contactForm" onsubmit="submitContactForm(event)">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required />
-        <label for="email">Email:</label>
-        <input type="email" id="email" required />
-        <label for="message">Message:</label>
-        <textarea id="message" required></textarea>
-        <button type="submit">Submit</button>
-      </form>
-      <div id="contactMessage"></div>
+      <div class="container contact-card">
+        <h2>Contact Adventure India</h2>
+        <p>Need corporate bookings or custom itineraries? We can help.</p>
+        <form id="contactForm" class="stacked-form">
+          <label for="name">Name</label>
+          <input type="text" id="name" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
+
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <p id="contactMessage" class="form-message" role="status"></p>
+      </div>
     </section>
   </main>
 
-  <!-- Booking Modal -->
-  <div id="bookingModal" class="modal">
+  <div id="bookingModal" class="modal" aria-hidden="true">
     <div class="modal-content">
-      <span class="close" onclick="closeBookingModal()">&times;</span>
-      <h2>Book Adventure: <span id="modalAdventureName"></span></h2>
-      <form id="bookingForm" onsubmit="submitBooking(event)">
-        <label for="bookingName">Your Name:</label>
+      <button class="close" type="button" id="closeBooking" aria-label="Close booking form">&times;</button>
+      <h2>Book Ticket</h2>
+      <p id="selectedAdventure" class="selected-adventure"></p>
+      <form id="bookingForm" class="stacked-form">
+        <label for="bookingName">Full Name</label>
         <input type="text" id="bookingName" required />
-        <label for="bookingEmail">Your Email:</label>
+
+        <label for="bookingEmail">Email</label>
         <input type="email" id="bookingEmail" required />
-        <button type="submit">Confirm Booking</button>
+
+        <label for="bookingDate">Preferred Date</label>
+        <input type="date" id="bookingDate" required />
+
+        <label for="participants">Participants</label>
+        <input type="number" id="participants" min="1" max="15" value="1" required />
+
+        <button type="submit">Confirm Ticket Request</button>
       </form>
-      <div id="bookingMessage"></div>
+      <p id="bookingMessage" class="form-message" role="status"></p>
     </div>
   </div>
 
